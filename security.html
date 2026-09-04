@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Center — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Security Center</h1>
+            <p class="page-subtitle">Manage login activity, password updates, and two-factor authentication.</p>
+          </div>
+        </div>
+
+        <div style="max-width:750px; margin:0 auto; display:flex; flex-direction:column; gap:1.5rem;">
+          <!-- Security Status Banner -->
+          <div class="card" style="background:linear-gradient(135deg, var(--surface) 0%, var(--primary-light) 100%); display:flex; align-items:center; gap:1.5rem;">
+            <div style="width:56px; height:56px; border-radius:50%; background:var(--success-light); color:var(--success); display:flex; align-items:center; justify-content:center; font-size:1.75rem; font-weight:900;">
+              🛡️
+            </div>
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:800;">Security Status: Excellent</h3>
+              <p style="font-size:0.875rem; color:var(--text-secondary); margin-top:0.15rem;">Your banking credentials and 2FA settings are active and healthy.</p>
+            </div>
+          </div>
+
+          <!-- 2FA Toggle -->
+          <div class="card">
+            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Two-Factor Authentication (2FA)</h3>
+            <p style="font-size:0.875rem; color:var(--text-secondary); margin-bottom:1rem;">Protect your account with SMS/Authenticator verification codes during sign in.</p>
+            
+            <div class="switch-container">
+              <div class="switch-label-group">
+                <span class="switch-title">Enable 2FA Protection</span>
+                <span class="switch-desc">Require one-time verification code on login</span>
+              </div>
+              <label class="switch">
+                <input type="checkbox" id="2fa-toggle" checked>
+                <span class="slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Password Update -->
+          <div class="card">
+            <h3 style="font-size:1.1rem; font-weight:700; margin-bottom:1rem;">Update Password</h3>
+            <form id="change-pass-form">
+              <div class="form-group">
+                <label class="form-label">Current Password</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">New Password</label>
+                <input type="password" class="form-control" placeholder="••••••••" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm" style="margin-top:0.5rem;">Update Password</button>
+            </form>
+          </div>
+
+          <!-- Active Sessions Log -->
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Recent Login Activity</h3>
+            </div>
+            <div class="table-responsive">
+              <table class="banking-table">
+                <thead>
+                  <tr>
+                    <th>Device / Browser</th>
+                    <th>Location</th>
+                    <th>Date & Time</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <strong>Chrome on macOS</strong>
+                      <div style="font-size:0.75rem; color:var(--text-secondary); font-family:monospace; margin-top:0.2rem;" id="session-id-display">Session ID: Checking...</div>
+                    </td>
+                    <td>Washington DC, USA</td>
+                    <td>Today (Active Session)</td>
+                    <td><span class="badge badge-success">Current</span></td>
+                  </tr>
+                  <tr>
+                    <td><strong>Mobile Safari on iPhone</strong></td>
+                    <td>Washington DC, USA</td>
+                    <td>Yesterday, 04:15 PM</td>
+                    <td><span class="badge badge-secondary">Logged Out</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AuthModule.checkAuthentication();
+
+      const currentSession = AuthModule.getSessionId();
+      const sessionDisplay = document.getElementById('session-id-display');
+      if (sessionDisplay) {
+        sessionDisplay.textContent = currentSession ? `Session ID: ${currentSession}` : 'Session ID: N/A';
+      }
+
+      document.getElementById('2fa-toggle')?.addEventListener('change', (e) => {
+        if (e.target.checked) {
+          UIModule.showToast('2FA Protection Enabled', 'success');
+        } else {
+          UIModule.showToast('2FA Protection Disabled', 'warning');
+        }
+      });
+
+      document.getElementById('change-pass-form')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+        UIModule.showToast('✓ Password updated successfully!', 'success');
+        e.target.reset();
+      });
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transfer Successful — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div style="max-width:540px; margin:2rem auto; text-align:center;">
+          <div class="card" style="padding:2.5rem; border-top:6px solid var(--success);">
+            <div style="width:64px; height:64px; background:var(--success-light); color:var(--success); border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:2rem; margin:0 auto 1.5rem; font-weight:900;">
+              ✓
+            </div>
+
+            <h1 style="font-size:1.75rem; font-weight:800; color:var(--text-primary); margin-bottom:0.5rem;">Transfer Successful</h1>
+            <p style="color:var(--text-secondary); font-size:0.9rem; margin-bottom:1.5rem;">Your funds have been transferred successfully.</p>
+
+            <div style="background-color:var(--bg-secondary); border-radius:var(--radius-lg); padding:1.25rem; margin-bottom:2rem; text-align:left; font-size:0.9rem; display:flex; flex-direction:column; gap:0.75rem;">
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted);">Reference Code:</span>
+                <strong id="receipt-ref" style="font-family:monospace; color:var(--accent);">TRX-000000</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted);">Amount Transferred:</span>
+                <strong id="receipt-amount" style="color:var(--success); font-size:1.1rem;">$0.00</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted);">To Recipient:</span>
+                <strong id="receipt-to">Recipient</strong>
+              </div>
+              <div style="display:flex; justify-content:space-between;">
+                <span style="color:var(--text-muted);">Status:</span>
+                <span class="badge badge-success">Completed</span>
+              </div>
+            </div>
+
+            <div style="display:flex; gap:1rem;">
+              <a href="dashboard.html" class="btn btn-secondary" style="flex:1;">Return to Dashboard</a>
+              <a href="transfers.html" class="btn btn-primary" style="flex:1;">Another Transfer</a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AuthModule.checkAuthentication();
+      const params = new URLSearchParams(window.location.search);
+      const ref = params.get('ref') || 'TRX-839241';
+      const amount = parseFloat(params.get('amount')) || 500.00;
+      const to = params.get('to') || 'Savings Account';
+
+      document.getElementById('receipt-ref').textContent = ref;
+      document.getElementById('receipt-amount').textContent = UIModule.formatCurrency(amount);
+      document.getElementById('receipt-to').textContent = decodeURIComponent(to);
+    });
+  </script>
+</body>
+</html>

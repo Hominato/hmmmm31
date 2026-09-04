@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Navbar Slot -->
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <!-- Sidebar Slot -->
+      <div id="sidebar-slot"></div>
+
+      <!-- Main Content Area -->
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Financial Dashboard</h1>
+            <p class="page-subtitle">Welcome back, Meechie Demetrius! Here is your financial overview.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <!-- Balance Summary Hero Widget -->
+          <div class="balance-summary-hero">
+            <div class="hero-balance-header">
+              <div>
+                <div class="hero-balance-label">Total Financial Balance</div>
+                <div class="hero-total-amount" id="dash-total-balance">$200,000.00</div>
+              </div>
+              <span class="badge badge-success" style="background:rgba(16,185,129,0.2); color:#34d399; font-size:0.8rem;">
+                ✓ Accounts Active
+              </span>
+            </div>
+
+            <div class="hero-sub-balances">
+              <div class="sub-balance-item">
+                <span class="sub-balance-label">Available Balance</span>
+                <span class="sub-balance-val" id="dash-available-balance">$200,000.00</span>
+              </div>
+              <div class="sub-balance-item">
+                <span class="sub-balance-label">Everyday Checking</span>
+                <span class="sub-balance-val" id="dash-checking-balance">$65,000.00</span>
+              </div>
+              <div class="sub-balance-item">
+                <span class="sub-balance-label">Primary Savings</span>
+                <span class="sub-balance-val" id="dash-savings-balance">$135,000.00</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Quick Actions Grid -->
+          <div class="quick-actions-card card">
+            <div class="card-header">
+              <h2 class="card-title">Quick Actions</h2>
+            </div>
+            <div class="quick-actions-grid">
+              <a href="transfers.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+                </div>
+                <span>Transfer Money</span>
+              </a>
+
+              <a href="bills.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <span>Pay a Bill</span>
+              </a>
+
+              <a href="deposits.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                </div>
+                <span>Deposit Check</span>
+              </a>
+
+              <a href="statements.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+                <span>Statements</span>
+              </a>
+
+              <a href="cards.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                </div>
+                <span>Manage Cards</span>
+              </a>
+
+              <a href="taxes.html" class="quick-action-btn">
+                <div class="quick-action-icon">
+                  <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m-6 4h6m-6 4h4M12 3v4a1 1 0 001 1h4m-5-5H7a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V8l-5-5z"/></svg>
+                </div>
+                <span>Tax Documents</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Recent Transactions Widget -->
+          <div class="transactions-widget card">
+            <div class="card-header">
+              <h2 class="card-title">Recent Activity</h2>
+              <a href="transactions.html" class="btn btn-outline btn-sm">View All Transactions</a>
+            </div>
+            <div class="table-responsive">
+              <table class="banking-table">
+                <thead>
+                  <tr>
+                    <th>Description</th>
+                    <th>Date</th>
+                    <th>Status</th>
+                    <th style="text-align:right;">Amount</th>
+                  </tr>
+                </thead>
+                <tbody id="recent-transactions-list">
+                  <!-- Rendered dynamically -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <!-- Mobile Nav Slot -->
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

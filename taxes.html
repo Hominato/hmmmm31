@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tax Information &amp; Documents — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Tax Information & Documents</h1>
+            <p class="page-subtitle">Access annual tax statements, view interest summaries, or request official tax forms for IRS filing.</p>
+          </div>
+          <button class="btn btn-primary btn-sm" onclick="openRequestTaxModal()">+ Request Tax Form</button>
+        </div>
+
+        <!-- Tax Summary Widgets -->
+        <div class="stats-grid" style="margin-bottom:2rem;">
+          <div class="card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">2025 Taxable Interest</span>
+              <div class="stat-icon" style="background:rgba(2,132,199,0.1); color:var(--accent);">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              </div>
+            </div>
+            <div class="stat-value">$1,250.00</div>
+            <div class="stat-footer">Form 1099-INT Total Reported</div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">2025 Mortgage Interest Paid</span>
+              <div class="stat-icon" style="background:rgba(16,185,129,0.1); color:var(--success);">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+              </div>
+            </div>
+            <div class="stat-value">$3,780.00</div>
+            <div class="stat-footer">Form 1098 Deductible Amount</div>
+          </div>
+
+          <div class="card stat-card">
+            <div class="stat-header">
+              <span class="stat-label">Federal Tax Withheld</span>
+              <div class="stat-icon" style="background:rgba(245,158,11,0.1); color:var(--warning);">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+            </div>
+            <div class="stat-value">$0.00</div>
+            <div class="stat-footer">SSN / Tax ID: ***-**-4450</div>
+          </div>
+        </div>
+
+        <!-- Filter & Title Section -->
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem; flex-wrap:wrap; gap:1rem;">
+          <h2 style="font-size:1.25rem; font-weight:700; color:var(--text-primary);">Available Tax Statements</h2>
+          <div style="display:flex; align-items:center; gap:0.5rem;">
+            <label style="font-size:0.85rem; color:var(--text-muted); font-weight:600;">Filter Year:</label>
+            <select class="form-control form-select" style="padding:0.4rem 0.8rem; font-size:0.85rem; width:auto;" onchange="filterTaxYear(this.value)">
+              <option value="all">All Tax Years</option>
+              <option value="2025" selected>2025 Tax Year</option>
+              <option value="2024">2024 Tax Year</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Container rendered dynamically by js/taxes.js -->
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap:1.5rem;" id="taxes-container"></div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/taxes.js"></script>
+</body>
+</html>

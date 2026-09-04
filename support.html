@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Support Center — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Help & Support Center</h1>
+            <p class="page-subtitle">Frequently asked questions and member support ticket submissions.</p>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:2rem;">
+          <!-- FAQ Section -->
+          <div>
+            <h2 style="font-size:1.35rem; font-weight:800; margin-bottom:1rem;">Frequently Asked Questions</h2>
+
+            <div style="display:flex; flex-direction:column; gap:1rem;">
+              <details class="card" style="cursor:pointer;">
+                <summary style="font-weight:700; font-size:0.95rem;">How do I transfer money to another account?</summary>
+                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.75rem; line-height:1.6;">
+                  Navigate to the <strong>Transfers</strong> page from the sidebar menu. Choose your source account, select the destination account or beneficiary, enter the dollar amount, and click <strong>Confirm Transfer</strong>.
+                </p>
+              </details>
+
+              <details class="card" style="cursor:pointer;">
+                <summary style="font-weight:700; font-size:0.95rem;">How do I freeze or unfreeze my debit card?</summary>
+                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.75rem; line-height:1.6;">
+                  Go to the <strong>Cards</strong> page. Locate your Everyday Debit Card or Credit Card and toggle the <strong>Freeze Card</strong> switch. The card status will update immediately to block new purchases.
+                </p>
+              </details>
+
+              <details class="card" style="cursor:pointer;">
+                <summary style="font-weight:700; font-size:0.95rem;">How do I download a monthly statement PDF?</summary>
+                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.75rem; line-height:1.6;">
+                  Visit the <strong>Statements</strong> page in the navigation bar. You will see a list of monthly statement periods. Click <strong>Download PDF</strong> or <strong>View Summary</strong> to print.
+                </p>
+              </details>
+
+              <details class="card" style="cursor:pointer;">
+                <summary style="font-weight:700; font-size:0.95rem;">How do I deposit a check using mobile deposit?</summary>
+                <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.75rem; line-height:1.6;">
+                  Click <strong>Deposits</strong> in the sidebar. Upload sample images of the front and back of your check, enter the deposit amount, and click <strong>Submit Deposit</strong>.
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <!-- Support Form Section -->
+          <div>
+            <h2 style="font-size:1.35rem; font-weight:800; margin-bottom:1rem;">Submit Member Support Ticket</h2>
+            <div class="card" style="padding:2rem;">
+              <form id="support-ticket-form">
+                <div class="form-group">
+                  <label class="form-label">Subject</label>
+                  <input type="text" id="sup-subject" class="form-control" placeholder="e.g. Question regarding scheduled bill pay" required>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Category</label>
+                  <select id="sup-category" class="form-control form-select">
+                    <option value="General Inquiry">General Inquiry</option>
+                    <option value="Transfers & Payments">Transfers & Payments</option>
+                    <option value="Card Support">Card Support</option>
+                    <option value="Taxes & Tax Documents">Taxes & Tax Documents</option>
+                  </select>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Message Details</label>
+                  <textarea id="sup-message" class="form-control" rows="4" placeholder="Describe your inquiry or issue..." required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Create Support Ticket</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/support.js"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account Details — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area" id="account-details-container">
+        <div class="page-header">
+          <div>
+            <a href="accounts.html" style="font-size:0.85rem; font-weight:600;">← Back to Accounts</a>
+            <h1 id="acc-detail-name" style="margin-top:0.25rem;">Everyday Checking</h1>
+            <p class="page-subtitle" id="acc-detail-number">Account **** 4821 • Routing: 122000496</p>
+          </div>
+          <div style="display:flex; gap:0.5rem;">
+            <a href="transfers.html" class="btn btn-primary btn-sm">Transfer Funds</a>
+            <button class="btn btn-outline btn-sm" id="export-statement-btn">Export Statement</button>
+          </div>
+        </div>
+
+        <!-- Account Balance Header Card -->
+        <div class="card" style="margin-bottom:2rem; background:linear-gradient(135deg, var(--surface) 0%, var(--bg-secondary) 100%);">
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1.5rem;">
+            <div>
+              <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase;">Current Balance</div>
+              <div style="font-size:2.25rem; font-weight:800; color:var(--text-primary);" id="acc-detail-balance">$0.00</div>
+            </div>
+            <div>
+              <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase;">Available Balance</div>
+              <div style="font-size:1.75rem; font-weight:700; color:var(--accent);" id="acc-detail-avail">$0.00</div>
+            </div>
+            <div>
+              <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase;">Dividend APY Rate</div>
+              <div style="font-size:1.75rem; font-weight:700; color:var(--success);" id="acc-detail-apy">0.05%</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="card" style="margin-bottom:1.5rem;">
+          <div style="display:flex; justify-content:space-between; gap:1rem; flex-wrap:wrap;">
+            <div style="flex:1; min-width:240px;">
+              <input type="text" id="trx-search-input" class="form-control" placeholder="Search account transactions...">
+            </div>
+            <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
+              <select id="trx-filter-type" class="form-control form-select" style="width:auto;">
+                <option value="all">All Transactions</option>
+                <option value="deposits">Deposits Only</option>
+                <option value="withdrawals">Withdrawals Only</option>
+                <option value="transfers">Transfers</option>
+                <option value="bills">Bills</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transactions Table -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="banking-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Status</th>
+                  <th style="text-align:right;">Amount</th>
+                </tr>
+              </thead>
+              <tbody id="account-trx-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/accounts.js"></script>
+</body>
+</html>

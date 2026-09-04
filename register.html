@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Account — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="public-page" style="display:flex; flex-direction:column; min-height:100vh; background-color:var(--bg-secondary);">
+
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding: 2rem 1rem;">
+    <div class="card" style="width:100%; max-width:600px; padding:2.5rem; box-shadow:var(--shadow-xl);">
+      <div style="text-align:center; margin-bottom:2rem;">
+        <a href="index.html" class="nav-brand" style="justify-content:center; margin-bottom:0.75rem;">
+          <div class="brand-icon">WF</div>
+          <span>Wells Fargo</span>
+        </a>
+        <h1 style="font-size:1.5rem; font-weight:800;">Open a Member Account</h1>
+        <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.25rem;">Online membership application</p>
+      </div>
+
+      <!-- Step Indicator -->
+      <div class="wizard-steps">
+        <div class="wizard-step active" id="step-node-1">
+          <div class="wizard-step-number">1</div>
+          <div class="wizard-step-title">Personal</div>
+        </div>
+        <div class="wizard-step" id="step-node-2">
+          <div class="wizard-step-number">2</div>
+          <div class="wizard-step-title">Address</div>
+        </div>
+        <div class="wizard-step" id="step-node-3">
+          <div class="wizard-step-number">3</div>
+          <div class="wizard-step-title">Security</div>
+        </div>
+        <div class="wizard-step" id="step-node-4">
+          <div class="wizard-step-number">4</div>
+          <div class="wizard-step-title">Review</div>
+        </div>
+      </div>
+
+      <form id="reg-wizard-form">
+        <!-- Step 1: Personal Info -->
+        <div class="wizard-pane" id="pane-1">
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" id="reg-fname" class="form-control" required value="Meechie">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" id="reg-lname" class="form-control" required value="Demetrius">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" id="reg-dob" class="form-control" required value="1990-05-15">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Phone Number</label>
+            <input type="tel" id="reg-phone" class="form-control" required value="213 805 9269">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" id="reg-email" class="form-control" required value="meechiedemetrius333@gmail.com">
+          </div>
+          <button type="button" class="btn btn-primary btn-lg" style="width:100%; margin-top:1rem;" onclick="goToStep(2)">Continue to Address →</button>
+        </div>
+
+        <!-- Step 2: Address -->
+        <div class="wizard-pane" id="pane-2" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Street Address</label>
+            <input type="text" id="reg-street" class="form-control" required value="100 Federal Way, Suite 400">
+          </div>
+          <div style="display:grid; grid-template-columns:2fr 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label class="form-label">City</label>
+              <input type="text" id="reg-city" class="form-control" required value="Washington">
+            </div>
+            <div class="form-group">
+              <label class="form-label">State</label>
+              <input type="text" id="reg-state" class="form-control" required value="DC">
+            </div>
+            <div class="form-group">
+              <label class="form-label">ZIP Code</label>
+              <input type="text" id="reg-zip" class="form-control" required value="20001">
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem; margin-top:1rem;">
+            <button type="button" class="btn btn-secondary btn-lg" style="flex:1;" onclick="goToStep(1)">← Back</button>
+            <button type="button" class="btn btn-primary btn-lg" style="flex:2;" onclick="goToStep(3)">Continue to Security →</button>
+          </div>
+        </div>
+
+        <!-- Step 3: Security -->
+        <div class="wizard-pane" id="pane-3" style="display:none;">
+          <div class="form-group">
+            <label class="form-label">Username</label>
+            <input type="text" id="reg-user" class="form-control" required value="meechiedemetrius">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Password</label>
+            <input type="password" id="reg-pass" class="form-control" required value="Godisgood2014">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Confirm Password</label>
+            <input type="password" id="reg-pass-confirm" class="form-control" required value="Godisgood2014">
+          </div>
+          <div style="display:flex; gap:1rem; margin-top:1rem;">
+            <button type="button" class="btn btn-secondary btn-lg" style="flex:1;" onclick="goToStep(2)">← Back</button>
+            <button type="button" class="btn btn-primary btn-lg" style="flex:2;" onclick="goToStep(4)">Review Application →</button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="wizard-pane" id="pane-4" style="display:none;">
+          <div style="background-color:var(--bg-secondary); border-radius:var(--radius-lg); padding:1.25rem; margin-bottom:1.5rem; font-size:0.9rem;">
+            <h4 style="margin-bottom:0.75rem;">Review Account Information</h4>
+            <div style="display:flex; flex-direction:column; gap:0.5rem;">
+              <div><strong>Name:</strong> <span id="rev-name">Meechie Demetrius</span></div>
+              <div><strong>Email:</strong> <span id="rev-email">meechiedemetrius333@gmail.com</span></div>
+              <div><strong>Address:</strong> <span id="rev-address">100 Federal Way, Washington DC</span></div>
+              <div><strong>Username:</strong> <span id="rev-user">meechiedemetrius</span></div>
+            </div>
+          </div>
+          <div style="display:flex; gap:1rem;">
+            <button type="button" class="btn btn-secondary btn-lg" style="flex:1;" onclick="goToStep(3)">← Edit</button>
+            <button type="submit" class="btn btn-primary btn-lg" style="flex:2;">Submit Application</button>
+          </div>
+        </div>
+      </form>
+
+      <div style="text-align:center; margin-top:1.75rem; font-size:0.875rem; color:var(--text-secondary);">
+        Already have an account? <a href="login.html" style="font-weight:700;">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    let currentStep = 1;
+
+    function goToStep(step) {
+      document.getElementById(`pane-${currentStep}`).style.display = 'none';
+      document.getElementById(`step-node-${currentStep}`).classList.remove('active');
+      if (step > currentStep) {
+        document.getElementById(`step-node-${currentStep}`).classList.add('completed');
+      }
+
+      currentStep = step;
+      document.getElementById(`pane-${currentStep}`).style.display = 'block';
+      document.getElementById(`step-node-${currentStep}`).classList.add('active');
+
+      if (step === 4) {
+        document.getElementById('rev-name').textContent = `${document.getElementById('reg-fname').value} ${document.getElementById('reg-lname').value}`;
+        document.getElementById('rev-email').textContent = document.getElementById('reg-email').value;
+        document.getElementById('rev-address').textContent = `${document.getElementById('reg-street').value}, ${document.getElementById('reg-city').value} ${document.getElementById('reg-state').value}`;
+        document.getElementById('rev-user').textContent = document.getElementById('reg-user').value;
+      }
+    }
+
+    document.getElementById('reg-wizard-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      DemoStorage.updateUser({
+        name: `${document.getElementById('reg-fname').value} ${document.getElementById('reg-lname').value}`,
+        firstName: document.getElementById('reg-fname').value,
+        lastName: document.getElementById('reg-lname').value,
+        email: document.getElementById('reg-email').value,
+        phone: document.getElementById('reg-phone').value,
+        address: document.getElementById('reg-street').value,
+        city: document.getElementById('reg-city').value,
+        state: document.getElementById('reg-state').value,
+        zip: document.getElementById('reg-zip').value,
+        username: document.getElementById('reg-user').value
+      });
+
+      UIModule.showToast('✓ Account created successfully! Please log in.', 'success');
+      setTimeout(() => {
+        window.location.href = 'login.html';
+      }, 1200);
+    });
+  </script>
+</body>
+</html>

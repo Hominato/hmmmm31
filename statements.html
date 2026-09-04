@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Statements — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Monthly Statements</h1>
+            <p class="page-subtitle">Access, view, download, or print official monthly account statements.</p>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="table-responsive">
+            <table class="banking-table">
+              <thead>
+                <tr>
+                  <th>Statement Period</th>
+                  <th>Account Summary</th>
+                  <th>Generated Date</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>September 2026 Statement</strong></td>
+                  <td>Everyday Checking & Primary Savings</td>
+                  <td>Sep 01, 2026</td>
+                  <td style="text-align:right;">
+                    <button class="btn btn-outline btn-sm" onclick="viewStatementModal('September 2026')">View Summary</button>
+                    <button class="btn btn-primary btn-sm" onclick="downloadStatement('September 2026')">Download PDF</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>August 2026 Statement</strong></td>
+                  <td>Everyday Checking & Primary Savings</td>
+                  <td>Aug 01, 2026</td>
+                  <td style="text-align:right;">
+                    <button class="btn btn-outline btn-sm" onclick="viewStatementModal('August 2026')">View Summary</button>
+                    <button class="btn btn-primary btn-sm" onclick="downloadStatement('August 2026')">Download PDF</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>July 2026 Statement</strong></td>
+                  <td>Everyday Checking & Primary Savings</td>
+                  <td>Jul 01, 2026</td>
+                  <td style="text-align:right;">
+                    <button class="btn btn-outline btn-sm" onclick="viewStatementModal('July 2026')">View Summary</button>
+                    <button class="btn btn-primary btn-sm" onclick="downloadStatement('July 2026')">Download PDF</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>June 2026 Statement</strong></td>
+                  <td>Everyday Checking & Primary Savings</td>
+                  <td>Jun 01, 2026</td>
+                  <td style="text-align:right;">
+                    <button class="btn btn-outline btn-sm" onclick="viewStatementModal('June 2026')">View Summary</button>
+                    <button class="btn btn-primary btn-sm" onclick="downloadStatement('June 2026')">Download PDF</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AuthModule.checkAuthentication();
+    });
+
+    function downloadStatement(period) {
+      UIModule.showToast(`✓ PDF statement for ${period} downloaded.`, 'success');
+    }
+
+    function viewStatementModal(period) {
+      let modal = document.getElementById('stmt-summary-modal');
+      if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'stmt-summary-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+          <div class="modal-card" style="max-width:540px;">
+            <div class="modal-header">
+              <h3 class="modal-title" id="stmt-modal-title">Statement Summary</h3>
+              <button class="modal-close-btn" onclick="UIModule.closeModal('stmt-summary-modal')">&times;</button>
+            </div>
+            <div class="modal-body">
+              <div style="background:var(--bg-secondary); padding:1rem; border-radius:var(--radius-lg); margin-bottom:1rem; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem;">
+                  <span>Opening Balance:</span>
+                  <strong>$22,100.00</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:var(--success);">
+                  <span>Total Deposits:</span>
+                  <strong>+$4,024.15</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; color:var(--danger);">
+                  <span>Total Withdrawals:</span>
+                  <strong>-$1,273.70</strong>
+                </div>
+                <div style="display:flex; justify-content:space-between; border-top:1px solid var(--border-color); padding-top:0.5rem;">
+                  <span>Ending Balance:</span>
+                  <strong style="color:var(--accent); font-size:1.1rem;">$24,850.45</strong>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" onclick="window.print()">Print Statement</button>
+              <button class="btn btn-primary" onclick="UIModule.closeModal('stmt-summary-modal')">Close</button>
+            </div>
+          </div>
+        `;
+        document.body.appendChild(modal);
+      }
+
+      document.getElementById('stmt-modal-title').textContent = `${period} Statement Summary`;
+      UIModule.openModal('stmt-summary-modal');
+    }
+  </script>
+</body>
+</html>

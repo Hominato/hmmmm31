@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Transaction History — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-container">
+    <div id="navbar-slot"></div>
+
+    <div class="main-layout">
+      <div id="sidebar-slot"></div>
+
+      <main class="content-area">
+        <div class="page-header">
+          <div class="page-title-group">
+            <h1>Transaction History</h1>
+            <p class="page-subtitle">Search, filter, categorize, and export your banking transactions.</p>
+          </div>
+          <button class="btn btn-outline btn-sm" id="export-csv-btn">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Export CSV
+          </button>
+        </div>
+
+        <!-- Search & Filter Controls -->
+        <div class="card" style="margin-bottom:1.5rem;">
+          <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap:1rem;">
+            <div>
+              <input type="text" id="trx-search" class="form-control" placeholder="Search by merchant or description...">
+            </div>
+            <div>
+              <select id="trx-category-filter" class="form-control form-select">
+                <option value="all">All Categories</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Food & Dining">Food & Dining</option>
+                <option value="Utilities">Utilities</option>
+                <option value="Transfers">Transfers</option>
+                <option value="Income">Income</option>
+                <option value="ATM">ATM</option>
+                <option value="Entertainment">Entertainment</option>
+                <option value="Transportation">Transportation</option>
+              </select>
+            </div>
+            <div>
+              <select id="trx-type-filter" class="form-control form-select">
+                <option value="all">All Types (Credit & Debit)</option>
+                <option value="credit">Credits (Deposits / Income)</option>
+                <option value="debit">Debits (Expenses / Withdrawals)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Transactions Table Card -->
+        <div class="card">
+          <div class="table-responsive">
+            <table class="banking-table">
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Category</th>
+                  <th>Type</th>
+                  <th style="text-align:right;">Amount</th>
+                  <th style="text-align:right;">Balance</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody id="transactions-table-tbody">
+                <!-- Rendered dynamically -->
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination Slot -->
+          <div id="pagination-controls"></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="mobile-nav-slot"></div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/transactions.js"></script>
+</body>
+</html>

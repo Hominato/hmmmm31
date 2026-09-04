@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign In — Wells Fargo</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/forms.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="public-page" style="display:flex; flex-direction:column; min-height:100vh; background-color:var(--bg-secondary);">
+
+  <div style="flex:1; display:flex; align-items:center; justify-content:center; padding: 2rem 1rem;">
+    <div class="card" style="width:100%; max-width:440px; padding:2.5rem; box-shadow:var(--shadow-xl);">
+      <div style="text-align:center; margin-bottom:2rem;">
+        <a href="index.html" class="nav-brand" style="justify-content:center; margin-bottom:0.75rem;">
+          <div class="brand-icon">WF</div>
+          <span>Wells Fargo</span>
+        </a>
+        <h1 style="font-size:1.5rem; font-weight:800;">Wells Fargo Online Banking</h1>
+        <p style="color:var(--text-secondary); font-size:0.875rem; margin-top:0.25rem;">Sign in to your online banking account</p>
+      </div>
+
+      <div id="login-error" class="invalid-feedback" style="display:none; margin-bottom:1rem; font-size:0.875rem; background:var(--danger-light); padding:0.65rem; border-radius:var(--radius-md);"></div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label class="form-label" for="login-email">Username or Email</label>
+          <input type="text" id="login-email" class="form-control" value="meechiedemetrius333@gmail.com" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <div class="form-label">
+            <label for="login-password">Password</label>
+            <a href="forgot-password.html" style="font-size:0.8rem;">Forgot Password?</a>
+          </div>
+          <input type="password" id="login-password" class="form-control" value="Godisgood2014" required autocomplete="current-password">
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem;">
+          <label class="form-check">
+            <input type="checkbox" id="remember-me" class="form-check-input" checked>
+            <span style="font-size:0.875rem; color:var(--text-secondary);">Remember me</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-lg" style="width:100%;">Sign In</button>
+      </form>
+
+      <div style="text-align:center; margin-top:1.75rem; font-size:0.875rem; color:var(--text-secondary);">
+        Don't have an account? <a href="register.html" style="font-weight:700;">Open Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/storage.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      AuthModule.redirectIfAuthenticated();
+
+      const form = document.getElementById('login-form');
+      const emailInput = document.getElementById('login-email');
+      const passwordInput = document.getElementById('login-password');
+      const errorDiv = document.getElementById('login-error');
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        errorDiv.style.display = 'none';
+
+        const email = emailInput.value.trim();
+        const password = passwordInput.value;
+        const remember = document.getElementById('remember-me').checked;
+
+        const result = AuthModule.login(email, password, remember);
+        if (result.success) {
+          UIModule.showToast('Login successful! Redirecting to dashboard...', 'success');
+          setTimeout(() => {
+            window.location.href = 'dashboard.html';
+          }, 800);
+        } else {
+          errorDiv.textContent = result.message;
+          errorDiv.style.display = 'block';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
