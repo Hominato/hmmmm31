@@ -72,7 +72,6 @@ function initTransactionsPage() {
           </div>
           <div style="display:flex; gap:0.5rem;">
             <button class="btn btn-secondary btn-sm" ${currentPage === 1 ? 'disabled' : ''} onclick="changePage(-1)">Previous</button>
-            <span style="display:flex; align-items:center; padding:0 0.75rem; font-size:0.875rem; font-weight:600;">Page ${currentPage} of ${totalPages}</span>
             <button class="btn btn-secondary btn-sm" ${currentPage === totalPages ? 'disabled' : ''} onclick="changePage(1)">Next</button>
           </div>
         </div>

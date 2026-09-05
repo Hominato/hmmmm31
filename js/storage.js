@@ -17,7 +17,60 @@ const STORAGE_KEYS = {
 };
 
 /// Data Version — increment when seed data changes to force a reset
-const DATA_VERSION = 'v6_meechie';
+const DATA_VERSION = 'v7_full_history_2021_2026';
+
+function generateTransactionsFrom2021To2026() {
+  const transactions = [];
+  let checkingBalance = 25000.00;
+  let savingsBalance = 50000.00;
+  let trxIdCounter = 1;
+
+  for (let year = 2021; year <= 2026; year++) {
+    const endMonth = (year === 2026) ? 4 : 12;
+    for (let month = 1; month <= endMonth; month++) {
+      const monthStr = month < 10 ? `0${month}` : `${month}`;
+
+      const monthlyItems = [
+        { day: '01', desc: 'Monthly Dividend Interest', cat: 'Income', type: 'credit', amt: 125.50 + (month * 2.5), acc: 'acc_savings' },
+        { day: '01', desc: 'Payroll Direct Deposit - ACME Corp', cat: 'Income', type: 'credit', amt: 4500.00, acc: 'acc_checking' },
+        { day: '03', desc: 'Starbucks Coffee', cat: 'Food & Dining', type: 'debit', amt: -6.75, acc: 'acc_checking' },
+        { day: '05', desc: 'PSEG Long Island Electric', cat: 'Utilities', type: 'debit', amt: -142.60, acc: 'acc_checking' },
+        { day: '08', desc: 'Trader Joes Groceries - Deer Park', cat: 'Food & Dining', type: 'debit', amt: -126.42, acc: 'acc_checking' },
+        { day: '10', desc: 'Shell Oil Gas Station', cat: 'Transportation', type: 'debit', amt: -48.50, acc: 'acc_checking' },
+        { day: '12', desc: 'Netflix Subscription', cat: 'Entertainment', type: 'debit', amt: -19.99, acc: 'acc_checking' },
+        { day: '15', desc: 'Payroll Direct Deposit - ACME Corp', cat: 'Income', type: 'credit', amt: 4500.00, acc: 'acc_checking' },
+        { day: '18', desc: 'Optimum Fiber Internet Payment', cat: 'Utilities', type: 'debit', amt: -79.99, acc: 'acc_checking' },
+        { day: '20', desc: 'Target Store Deer Park', cat: 'Shopping', type: 'debit', amt: -112.30, acc: 'acc_checking' },
+        { day: '22', desc: 'Whole Foods Market', cat: 'Food & Dining', type: 'debit', amt: -145.80, acc: 'acc_checking' },
+        { day: '25', desc: 'ATM Cash Withdrawal', cat: 'ATM', type: 'debit', amt: -100.00, acc: 'acc_checking' },
+        { day: '28', desc: 'Transfer to Primary Savings', cat: 'Transfers', type: 'debit', amt: -1000.00, acc: 'acc_checking' },
+        { day: '28', desc: 'Transfer from Everyday Checking', cat: 'Transfers', type: 'credit', amt: 1000.00, acc: 'acc_savings' }
+      ];
+
+      for (const item of monthlyItems) {
+        if (item.acc === 'acc_checking') {
+          checkingBalance = Math.round((checkingBalance + item.amt) * 100) / 100;
+        } else {
+          savingsBalance = Math.round((savingsBalance + item.amt) * 100) / 100;
+        }
+
+        transactions.push({
+          id: `trx_${trxIdCounter++}`,
+          date: `${year}-${monthStr}-${item.day}`,
+          description: item.desc,
+          category: item.cat,
+          type: item.type,
+          amount: item.amt,
+          balance: item.acc === 'acc_checking' ? checkingBalance : savingsBalance,
+          accountId: item.acc,
+          status: 'Completed'
+        });
+      }
+    }
+  }
+
+  return transactions.reverse();
+}
 
 /// Seed Data Definition
 const INITIAL_DATA = {
@@ -237,33 +290,7 @@ const INITIAL_DATA = {
     language: 'en-US',
     currency: 'USD'
   },
-  transactions: [
-    { id: 'trx_30', date: '2026-03-19', description: 'Amazon.com Purchase', category: 'Shopping', type: 'debit', amount: -84.23, balance: 65000.00, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_29', date: '2026-03-18', description: 'Payroll Direct Deposit - ACME Corp', category: 'Income', type: 'credit', amount: 4500.00, balance: 65084.23, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_28', date: '2026-03-16', description: 'PSEG Long Island Electric', category: 'Utilities', type: 'debit', amount: -142.60, balance: 60584.23, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_27', date: '2026-03-15', description: 'Trader Joes Groceries - Deer Park', category: 'Food & Dining', type: 'debit', amount: -126.42, balance: 60726.83, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_26', date: '2026-03-12', description: 'Transfer to Primary Savings', category: 'Transfers', type: 'debit', amount: -1000.00, balance: 60853.25, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_25', date: '2026-03-12', description: 'Transfer from Everyday Checking', category: 'Transfers', type: 'credit', amount: 1000.00, balance: 135000.00, accountId: 'acc_savings', status: 'Completed' },
-    { id: 'trx_24', date: '2026-03-10', description: 'Starbucks Coffee', category: 'Food & Dining', type: 'debit', amount: -6.75, balance: 61853.25, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_23', date: '2026-03-08', description: 'Shell Oil Gas Station', category: 'Transportation', type: 'debit', amount: -48.50, balance: 61860.00, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_22', date: '2026-03-05', description: 'Netflix Subscription', category: 'Entertainment', type: 'debit', amount: -19.99, balance: 61908.50, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_21', date: '2026-03-02', description: 'Target Store Deer Park', category: 'Shopping', type: 'debit', amount: -112.30, balance: 61928.49, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_20', date: '2026-02-28', description: 'State Tax Estimated Payment', category: 'Taxes', type: 'debit', amount: -250.00, balance: 62040.79, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_19', date: '2026-02-25', description: 'ATM Cash Withdrawal', category: 'ATM', type: 'debit', amount: -100.00, balance: 62290.79, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_18', date: '2026-02-22', description: 'Whole Foods Market', category: 'Food & Dining', type: 'debit', amount: -145.80, balance: 62390.79, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_17', date: '2026-02-18', description: 'Optimum Fiber Internet Payment', category: 'Utilities', type: 'debit', amount: -79.99, balance: 62536.59, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_16', date: '2026-02-15', description: 'Payroll Direct Deposit', category: 'Income', type: 'credit', amount: 4500.00, balance: 62616.58, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_15', date: '2026-02-10', description: 'IRS Tax Preparation Fee', category: 'Taxes', type: 'debit', amount: -250.00, balance: 58116.58, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_14', date: '2026-02-01', description: 'Monthly Dividend Interest', category: 'Income', type: 'credit', amount: 196.85, balance: 134000.00, accountId: 'acc_savings', status: 'Completed' },
-    { id: 'trx_13', date: '2026-01-28', description: 'State Tax Estimated Payment', category: 'Taxes', type: 'debit', amount: -250.00, balance: 58366.58, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_12', date: '2026-01-20', description: 'Home Depot Hardware', category: 'Shopping', type: 'debit', amount: -89.40, balance: 58616.58, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_11', date: '2026-01-15', description: 'Payroll Direct Deposit', category: 'Income', type: 'credit', amount: 4500.00, balance: 58705.98, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_10', date: '2026-01-10', description: 'Federal Tax Withholding', category: 'Taxes', type: 'debit', amount: -250.00, balance: 54205.98, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_9', date: '2025-12-28', description: 'State Tax Payment', category: 'Taxes', type: 'debit', amount: -250.00, balance: 54455.98, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_8', date: '2025-12-20', description: 'Apple Store Digital Purchase', category: 'Shopping', type: 'debit', amount: -4.99, balance: 54705.98, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_7', date: '2025-12-15', description: 'Payroll Direct Deposit', category: 'Income', type: 'credit', amount: 4500.00, balance: 54710.97, accountId: 'acc_checking', status: 'Completed' },
-    { id: 'trx_6', date: '2025-11-28', description: 'Quarterly Tax Filing Payment', category: 'Taxes', type: 'debit', amount: -250.00, balance: 50210.97, accountId: 'acc_checking', status: 'Completed' }
-  ]
+  transactions: generateTransactionsFrom2021To2026()
 };
 
 // Storage Engine Implementation
