@@ -140,13 +140,13 @@ export const Taxes = ({
       {/* Summary Widgets */}
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
         <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>2025 Taxable Interest</div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>2026 Taxable Interest</div>
           <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#0284c7', margin: '0.25rem 0' }}>$1,250.00</div>
           <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Form 1099-INT Total Reported</div>
         </div>
 
         <div style={{ background: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '12px', padding: '1.25rem' }}>
-          <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>2025 Mortgage Interest Paid</div>
+          <div style={{ fontSize: '0.8rem', color: '#64748b', textTransform: 'uppercase', fontWeight: 700 }}>2026 Mortgage Interest Paid</div>
           <div style={{ fontSize: '1.75rem', fontWeight: 800, color: '#10b981', margin: '0.25rem 0' }}>$3,780.00</div>
           <div style={{ fontSize: '0.8rem', color: '#94a3b8' }}>Form 1098 Deductible Amount</div>
         </div>
