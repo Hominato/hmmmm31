@@ -17,12 +17,10 @@ const STORAGE_KEYS = {
 };
 
 /// Data Version — increment when seed data changes to force a reset
-const DATA_VERSION = 'v7_full_history_2021_2026';
+const DATA_VERSION = 'v8_perfect_deductions_additions';
 
 function generateTransactionsFrom2021To2026() {
-  const transactions = [];
-  let checkingBalance = 25000.00;
-  let savingsBalance = 50000.00;
+  const rawList = [];
   let trxIdCounter = 1;
 
   for (let year = 2021; year <= 2026; year++) {
@@ -48,28 +46,49 @@ function generateTransactionsFrom2021To2026() {
       ];
 
       for (const item of monthlyItems) {
-        if (item.acc === 'acc_checking') {
-          checkingBalance = Math.round((checkingBalance + item.amt) * 100) / 100;
-        } else {
-          savingsBalance = Math.round((savingsBalance + item.amt) * 100) / 100;
-        }
-
-        transactions.push({
-          id: `trx_${trxIdCounter++}`,
+        rawList.push({
           date: `${year}-${monthStr}-${item.day}`,
-          description: item.desc,
-          category: item.cat,
+          desc: item.desc,
+          cat: item.cat,
           type: item.type,
-          amount: item.amt,
-          balance: item.acc === 'acc_checking' ? checkingBalance : savingsBalance,
-          accountId: item.acc,
-          status: 'Completed'
+          amt: item.amt,
+          acc: item.acc
         });
       }
     }
   }
 
-  return transactions.reverse();
+  // Working backward from target April 2026 balances
+  let checkingBal = 150153.00;
+  let savingsBal = 350000.00;
+  const result = [];
+
+  for (let i = rawList.length - 1; i >= 0; i--) {
+    const item = rawList[i];
+    let recordBal = 0;
+
+    if (item.acc === 'acc_checking') {
+      recordBal = checkingBal;
+      checkingBal = Math.round((checkingBal - item.amt) * 100) / 100;
+    } else {
+      recordBal = savingsBal;
+      savingsBal = Math.round((savingsBal - item.amt) * 100) / 100;
+    }
+
+    result.push({
+      id: `trx_${trxIdCounter++}`,
+      date: item.date,
+      description: item.desc,
+      category: item.cat,
+      type: item.type,
+      amount: item.amt,
+      balance: recordBal,
+      accountId: item.acc,
+      status: 'Completed'
+    });
+  }
+
+  return result;
 }
 
 /// Seed Data Definition
